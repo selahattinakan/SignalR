@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Scripts
+{
+    <script src="~/js/signalr-client.js"></script>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div id="div-connection-id" class="alert alert-primary" role="alert"></div>
+            <button type="button" class="btn btn-success disabled mx-1 my-1">
+                Connected Client Count : <span class="badge text-bg-secondary" id="span-connected-count"></span>
+            </button>
+            <button class="btn-primary mx-1 my-1" id="btn-send-message-all-client">Send All Clients</button>
+            <button class="btn-primary mx-1 my-1" id="btn-send-typed-message-all-client">Send All Clients (Complex Type)</button>
+            <button class="btn-primary mx-1 my-1" id="btn-send-message-caller-client">Send Caller Client</button>
+            <button class="btn-primary mx-1 my-1" id="btn-send-message-other-client">Send Other Clients</button>
+            <div>
+                <hr />
+                <input type="text" class="form-control mx-1 my-1" id="input-connection-id" placeholder="Connection Id" />
+                <button class="btn-primary mx-1 my-1" id="btn-send-message-individual-client">Send Individual Client</button>
+            </div>
+
+            <div>
+                <hr />
+                <div id="div-group-list" class="alert alert-warning" role="alert"></div>
+
+                <button class="btn-primary mx-1 my-1" id="btn-groupA-add">Add To Group A</button>
+                <button class="btn-primary mx-1 my-1" id="btn-groupA-remove">Remove From Group A</button>
+                <button class="btn-primary mx-1 my-1" id="btn-groupB-add">Add To Group B</button>
+                <button class="btn-primary mx-1 my-1" id="btn-groupB-remove">Remove From Group B</button>
+
+                <button class="btn-primary mx-1 my-1" id="btn-groupA-send-message">Send Message To Group A</button>
+                <button class="btn-primary mx-1 my-1" id="btn-groupB-send-message">Send Message To Group B</button>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "APIHub";
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7175/myhub").configureLogging(signalR.LogLevel.Information).build();
+
+            const broadcastMessageToAllClient = "BroadcastMessageToAllClient";
+            const receiveMessageForAllClient = "ReceiveMessageForAllClient";
+
+            async function start() {
+                try {
+                    await connection.start().then(() => {
+                        console.log("Hub connected");
+                    });
+                } catch (e) {
+                    setTimeout(() => start(), 5000);
+                }
+            }
+
+            connection.onclose(async () => {
+                await start();
+            });
+
+            start();
+
+            connection.on(receiveMessageForAllClient, (message) => {
+                console.log("Received API Hub message:", message);
+            });
+
+            $("#btn-api-hub").click(function () { // web'den api hub'a sonra tekrar web'e mesaj iletiliyor:  web->api hub->web
+                const message = "hello world to API Hub";
+                connection.invoke(broadcastMessageToAllClient, message).catch(err => console.error("error:", err));
+            });
+        });
+    </script>
+}
+
+<h1>APIHub</h1>
+
+
+<button class="btn-primary mx-1 my-2" id="btn-api-hub">Send Message To API Hub</button>
